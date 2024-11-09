@@ -1,6 +1,7 @@
 package com.app.teledrink.Controller;
 
 import com.app.teledrink.Dto.ListDrinkDto;
+import com.app.teledrink.Repository.DrinkFavoriteRepository;
 import com.app.teledrink.Service.DrinkService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +14,26 @@ import java.util.List;
 @RequestMapping("/drinks")
 public class AppController {
     private final DrinkService drinkService;
+    private final DrinkFavoriteRepository drinkFavoriteRepository;
 
-    public AppController(DrinkService drinkService) {
+    public AppController(DrinkService drinkService, DrinkFavoriteRepository drinkFavoriteRepository) {
         this.drinkService = drinkService;
+        this.drinkFavoriteRepository = drinkFavoriteRepository;
     }
 
     @GetMapping("/list")
     public String listDrinks(Model model) {
         List<ListDrinkDto> drinks = drinkService.getDrinks().collectList().block();
         model.addAttribute("drinks", drinks);
+        return "index";
+    }
+
+    @GetMapping("/listFavorite")
+    public String listFavoriteDrinks(Model model) {
+        List<ListDrinkDto> drinks = drinkFavoriteRepository.findAll();
+
+        model.addAttribute("drinks", drinks);
+        model.addAttribute("isFavoriteList", 1);
         return "index";
     }
 }
