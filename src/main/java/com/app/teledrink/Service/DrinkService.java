@@ -1,6 +1,6 @@
 package com.app.teledrink.Service;
 
-import com.app.teledrink.Dto.DrinkResponse;
+import com.app.teledrink.Dto.DrinkListResponse;
 import com.app.teledrink.Dto.ListDrinkDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,7 +19,7 @@ public class DrinkService {
         return webClient.get()
                 .uri("/filter.php?c=Cocktail")
                 .retrieve()
-                .bodyToMono(DrinkResponse.class)
+                .bodyToMono(DrinkListResponse.class)
                 .flatMapMany(drinkListResponse -> Flux.fromIterable(drinkListResponse.getDrinks()))
                 .take(12);
     }
