@@ -18,11 +18,11 @@
             <a href="/drinks/listFavorite" class="btn btn-primary">List my favorite drinks</a>
         </div>
         <div class="container">
-            <div class="row row-cols-md-3 g-4">
+            <div class="row row-cols-md-3 gx-5 gy-5">
                 <div class="col" th:each="drink : ${drinks}">
-                    <div class="card shadow-sm w-75" style="height: 310px" >
+                    <div class="card shadow-sm w-100" style="height: 360px" >
                         <a th:href="@{'detail?id=' + ${drink.idDrink}}">
-                            <img th:src="${drink.strDrinkThumb}" alt="imagen de una flor" height="230" class="w-100">
+                            <img th:src="${drink.strDrinkThumb}" alt="imagen de una flor" height="300" class="w-100">
                         </a>
 
                         <div class="card-body">
