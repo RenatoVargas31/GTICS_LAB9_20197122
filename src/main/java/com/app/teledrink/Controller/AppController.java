@@ -53,6 +53,8 @@ public class AppController {
         drinkFavorite.setIsFavorite(isFavorite);
         drinkFavoriteRepository.save(drinkFavorite);
         return "redirect:/drinks/detail?id=" + id;
+    }
+
     @GetMapping("/listFavorite")
     public String listFavoriteDrinks(Model model) {
         List<ListDrinkDto> drinks = drinkFavoriteRepository.findAll();
