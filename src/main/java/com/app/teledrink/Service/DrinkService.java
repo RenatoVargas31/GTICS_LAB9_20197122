@@ -1,7 +1,7 @@
 package com.app.teledrink.Service;
 
 import com.app.teledrink.Dto.DetailDrinkDto;
-import com.app.teledrink.Dto.DrinkResponse;
+import com.app.teledrink.Dto.DrinkDetailResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -19,7 +19,7 @@ public class DrinkService {
         return webClient.get()
                 .uri("/lookup.php?i={id}", id)
                 .retrieve()
-                .bodyToMono(DrinkResponse.class)
+                .bodyToMono(DrinkDetailResponse.class)
                 .map(drinkDetailResponse -> drinkDetailResponse.getDrinks().get(0));
     }
 }
