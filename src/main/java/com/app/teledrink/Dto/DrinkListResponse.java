@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class DrinkResponse {
+public class DrinkListResponse {
     @JsonProperty("drinks")
-    private List<DetailDrinkDto> drinks;
+    private List<ListDrinkDto> drinks;
 }

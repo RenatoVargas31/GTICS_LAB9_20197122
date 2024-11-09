@@ -13,6 +13,12 @@
         <div>
             <a href="/drinks/list" class="btn btn-dark">Regresar</a>
         </div>
+        <div class="text-center mb-3" th:if="${isFavorite == 0}">
+            <a th:href="@{'addFavorite?id=' + ${drink.idDrink}}" class="btn btn-outline-warning"><i class="fa-solid fa-star"></i> Add to Favorites</a>
+        </div>
+        <div class="text-center mb-3" th:if="${isFavorite == 1}">
+            <a href="#" class="btn btn-success disabled"><i class="fa-solid fa-check"></i> Favorite</a>
+        </div>
         <div class="row align-items-center">
             <h2 class="fw-bold text-center mb-4" th:text="${drink.strDrink}"></h2>
             <img th:src="${drink.strDrinkThumb}" alt="imagen de una flor" height="230" class="w-25 mx-auto d-block">
