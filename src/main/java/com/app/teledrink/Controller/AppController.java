@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +24,12 @@ public class AppController {
         this.drinkFavoriteRepository = drinkFavoriteRepository;
     }
 
+    @GetMapping("/list")
+    public String listDrinks(Model model) {
+        List<ListDrinkDto> drinks = drinkService.getDrinks().collectList().block();
+        model.addAttribute("drinks", drinks);
+        return "index";
+    }
     @GetMapping("/detail")
     public String detailDrink(Model model, Integer id) {
         DetailDrinkDto drink = drinkService.getDrinkDetail(id).block();
@@ -46,5 +53,12 @@ public class AppController {
         drinkFavorite.setIsFavorite(isFavorite);
         drinkFavoriteRepository.save(drinkFavorite);
         return "redirect:/drinks/detail?id=" + id;
+    @GetMapping("/listFavorite")
+    public String listFavoriteDrinks(Model model) {
+        List<ListDrinkDto> drinks = drinkFavoriteRepository.findAll();
+
+        model.addAttribute("drinks", drinks);
+        model.addAttribute("isFavoriteList", 1);
+        return "index";
     }
 }
